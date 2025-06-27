@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nasze Wesele</title>
+  <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -11,10 +12,10 @@
       box-sizing: border-box;
     }
     body, html {
-      font-family: sans-serif;
+      font-family: 'Helvetica Neue', sans-serif;
       overflow-x: hidden;
       color: white;
-      height: 200vh;
+      height: 100vh;
     }
     .background {
       position: fixed;
@@ -24,7 +25,8 @@
       height: 100%;
       background: url('photo.jpg') center/cover no-repeat;
       z-index: -2;
-      transition: filter 1s ease;
+      transition: filter 3s ease;
+      filter: brightness(1);
     }
     .background.dimmed {
       filter: brightness(0.4);
@@ -83,42 +85,71 @@
       pointer-events: auto;
     }
     .circle-button {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background-color: white;
-      color: black;
-      border: 2px solid #333;
+      width: 90%;
+      max-width: 400px;
+      height: 25%;
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      border: none;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      font-size: 14px;
+      font-size: 24px;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      border-radius: 16px;
+      transition: all 0.6s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
     }
-    .popup {
+    .popup-panel {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 20px;
+      top: 5%;
+      left: 5%;
+      width: 90%;
+      height: 90%;
+      background: rgba(0, 0, 0, 0.4);;
+      color: white;
       border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
       z-index: 1000;
       display: none;
-      width: 90%;
-      color: black;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      animation: fadeIn 0.6s ease forwards;
     }
-    .popup h2 {
+    .drink-list {
+  list-style: none;
+  padding-left: 0;
+  font-size: 16px;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.drink-list > li {
+  margin-bottom: 20px;
+}
+
+.drink-list > li > strong {
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.drink-list ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .popup-panel h2 {
       margin-bottom: 10px;
-      font-size: 18px;
-    }
-    .popup-close {
-      text-align: right;
-      margin-top: 10px;
     }
     .popup-close button {
       background: #333;
@@ -126,7 +157,21 @@
       border: none;
       padding: 6px 12px;
       border-radius: 6px;
+      font-size: 16px;
     }
+    .headline {
+      font-size: 48px;
+      font-weight: bold;
+    }
+    .subheadline {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+    #popup-plan {
+  font-size: 20px;
+  line-height: 1.6;
+}
+    
   </style>
 </head>
 <body>
@@ -134,29 +179,112 @@
 
   <div class="overlay">
     <div class="intro-texts" id="intro-texts">
-      <p id="text1">Drodzy goście</p>
-      <p id="text2">Dziękujemy za przybycie</p>
-      <p id="text3">Zescroluj na dół, aby dowiedzieć się więcej</p>
+      <p id="text1" class="headline">Dziękujemy</p>
+      <p id="text2" class="subheadline">że jesteś częścią naszego szczęścia</p>
     </div>
   </div>
 
   <div class="buttons-container" id="buttons">
-    <div class="circle-button" onclick="window.open('https://photos.google.com/', '_blank')">Zdjęcia</div>
-    <div class="circle-button" onclick="openPopup('plan')">Plan</div>
-    <div class="circle-button" onclick="openPopup('jedzenie')">Jedzenie</div>
+    <div class="circle-button" onclick="window.open('https://drive.google.com/drive/folders/1QCoAp9DsNbchQua1V3isKx9nr1bI1H2y?usp=sharing', '_blank')">Wgraj zdjęcia <br> oraz filmy</div>
+    <div class="circle-button" onclick="openPopup('plan')">Plan wesela</div>
+    <div class="circle-button" onclick="openPopup('jedzenie')">Menu</div>
+    <div class="circle-button" onclick="openPopup('drinki')">Drinki</div>
   </div>
 
-  <div class="popup" id="popup-plan">
+  <div class="popup-panel" id="popup-plan">
     <h2>Plan wesela</h2>
-    <p>15:00 - Ceremonia<br>17:00 - Obiad<br>19:00 - Zabawa i tańce<br>00:00 - Tort</p>
+    <p>15:00 - Ceremonia
+    <br>17:00 - Obiad
+    <br>18:00 - Pierwszy taniec
+    <br>19:00 - Zdjęcia
+    <br>20:00 - Zimny bufet
+    <br>21:00 - Tort weselny
+    <br>22:30 - Zimne ognie
+    <br>00:00 - Oczepiny
+    <br>04:00 - Zakończenie wesela
+  </p>
     <div class="popup-close"><button onclick="closePopup('plan')">Zamknij</button></div>
   </div>
 
-  <div class="popup" id="popup-jedzenie">
+  <div class="popup-panel" id="popup-jedzenie">
     <h2>Jedzenie</h2>
     <p>Menu:<br>- Zupa krem z pomidorów<br>- Kotlet schabowy z ziemniakami<br>- Danie wege: risotto grzybowe<br>- Deser: sernik</p>
     <div class="popup-close"><button onclick="closePopup('jedzenie')">Zamknij</button></div>
   </div>
+
+<div class="popup-panel" id="popup-drinki">
+  <h2>Drinki</h2>
+  <ul class="drink-list">
+    <li><strong>Mohito</strong>
+      <ul>
+        <li>Biały rum</li>
+        <li>Syrop cukrowy</li>
+        <li>Sok z limonki</li>
+        <li>Woda gazowana</li>
+      </ul>
+    </li>
+    <li><strong>Aperol Spritz</strong>
+      <ul>
+        <li>Prosecco</li>
+        <li>Aperol</li>
+        <li>Woda gazowana</li>
+      </ul>
+    </li>
+    <li><strong>Daiquiri</strong>
+      <ul>
+        <li>Biały rum</li>
+        <li>Syrop cukrowy</li>
+        <li>Sok z limonki</li>
+      </ul>
+    </li>
+    <li><strong>Aperol Fizz</strong>
+      <ul>
+        <li>Aperol</li>
+        <li>Syrop cukrowy</li>
+        <li>Sok z limonki</li>
+        <li>Woda gazowana</li>
+      </ul>
+    </li>
+    <li><strong>Lime & elderflower - BEZALKOHOLOWY</strong>
+      <ul>
+        <li>Syrop czarny bez</li>
+        <li>Sok z limonki</li>
+        <li>Woda gazowana</li>
+      </ul>
+    </li>
+    <li><strong>Cuba Libre</strong>
+      <ul>
+        <li>Biały rum</li>
+        <li>Sok z limonki</li>
+        <li>Coca-cola</li>
+      </ul>
+    </li>
+    <li><strong>Mohito czarny bez</strong>
+      <ul>
+        <li>Biały rum</li>
+        <li>Syrop czarny bez</li>
+        <li>Sok z limonki</li>
+        <li>Woda gazowana</li>
+      </ul>
+    </li>
+    <li><strong>Summer Vibes</strong>
+      <ul>
+        <li>Prosecco</li>
+        <li>Woda gazowana</li>
+        <li>Syrop czarny bez</li>
+      </ul>
+    </li>
+    <li><strong>Caribbean shot - PODSTAW KIELISZEK</strong>
+      <ul>
+        <li>Biały rum</li>
+        <li>Syrop cukrowy</li>
+        <li>Sok z limonki</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="popup-close"><button onclick="closePopup('drinki')">Zamknij</button></div>
+</div>
 
   <script>
     const background = document.getElementById('background');
@@ -164,35 +292,30 @@
     const intro = document.getElementById('intro-texts');
     const text1 = document.getElementById('text1');
     const text2 = document.getElementById('text2');
-    const text3 = document.getElementById('text3');
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > window.innerHeight / 3) {
-        background.classList.add('dimmed');
-        intro.classList.add('hidden');
-        buttons.classList.add('visible');
-      } else {
-        intro.classList.remove('hidden');
-        buttons.classList.remove('visible');
-      }
-    });
 
     function openPopup(type) {
-      document.getElementById(`popup-${type}`).style.display = 'block';
+      document.getElementById('buttons').classList.remove('visible');
+      const popup = document.getElementById(`popup-${type}`);
+      popup.style.display = 'flex';
     }
 
     function closePopup(type) {
-      document.getElementById(`popup-${type}`).style.display = 'none';
+      const popup = document.getElementById(`popup-${type}`);
+      popup.style.display = 'none';
+      document.getElementById('buttons').classList.add('visible');
     }
 
     window.addEventListener('load', () => {
       setTimeout(() => {
         background.classList.add('dimmed');
         intro.style.opacity = 1;
-        setTimeout(() => text1.classList.add('visible'), 500);
-        setTimeout(() => text2.classList.add('visible'), 1000);
-        setTimeout(() => text3.classList.add('visible'), 1500);
-      }, 1000);
+        setTimeout(() => text1.classList.add('visible'), 200);
+        setTimeout(() => text2.classList.add('visible'), 600);
+        setTimeout(() => {
+          intro.classList.add('hidden');
+          buttons.classList.add('visible');
+        }, 4600);
+      }, 500);
     });
   </script>
 </body>
