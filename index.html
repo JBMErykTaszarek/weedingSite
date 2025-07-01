@@ -171,6 +171,25 @@
   font-size: 20px;
   line-height: 1.6;
 }
+.menu-list {
+  padding-left: 20px; /* Większe odsunięcie od lewej */
+  font-size: 16px;
+  max-height: 100%;
+}
+
+.menu-list > li > strong,
+.menu-list > strong {
+  font-size: 24px; /* Większy nagłówek */
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+.menu-list li ul {
+  list-style: disc;
+  padding-left: 20px;
+}
     
   </style>
 </head>
@@ -206,11 +225,49 @@
     <div class="popup-close"><button onclick="closePopup('plan')">Zamknij</button></div>
   </div>
 
-  <div class="popup-panel" id="popup-jedzenie">
-    <h2>Jedzenie</h2>
-    <p>Menu:<br>- Zupa krem z pomidorów<br>- Kotlet schabowy z ziemniakami<br>- Danie wege: risotto grzybowe<br>- Deser: sernik</p>
-    <div class="popup-close"><button onclick="closePopup('jedzenie')">Zamknij</button></div>
+<div class="popup-panel" id="popup-jedzenie" style="display: none;">
+  <h2>Szwedzki stół</h2>
+  <div style="overflow-y: auto; flex-grow: 1; width: 100%; padding-right: 8px;">
+    <p>Szwedzki stół znajduje się przy wyjściu na ogród.</p>
+
+    <ul class="menu-list">
+        <strong>Dania zimne</strong>
+        <ul>
+          <li>
+            Selekcja mini kanapeczek:
+            <ul>
+              <li>z tatarem</li>
+              <li>z serem pleśniowym</li>
+              <li>z pastą warzywną</li>
+            </ul>
+          </li>
+          <li>Śledzik z gorczycą i cebulką</li>
+          <li>Pasztet staropolski z żurawiną</li>
+          <li>Mini galaciki drobiowe</li>
+          <li>Deska regionalnych wędlin i serów</li>
+          <li>Mini burgerki z szarpaną wieprzowiną</li>
+          <li>Mini szaszłyczki caprese</li>
+          <li>Sałatka Cezar z kurczakiem</li>
+          <li>Mix sałat z pieczonymi buraczkami i fetą</li>
+          <li>Sałatka z pomarańczą i granatem</li>
+          <li>Pieczywo</li>
+        </ul>
+        <strong >Dania ciepłe</strong>
+        <ul>
+          <li>Golonka w kapuście</li>
+          <li>Gołąbki z mięsem w sosie pomidorowym</li>
+          <li>Barszcz czysty</li>
+        </ul>
+
+    </ul>
   </div>
+
+  <div class="popup-close" style="margin-top: 20px;">
+    <button onclick="closePopup('jedzenie')">Zamknij</button>
+  </div>
+</div>
+
+
 
 <div class="popup-panel" id="popup-drinki">
   <h2>Drinki</h2>
